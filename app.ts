@@ -32,7 +32,12 @@ function applyMixins(deriverCto: any, baseCtors: any[]) {
     });
 }
 
+function GetMagazineByFrecuency(preferredFrecuency: Frecuency) {
 
+}
+
+type PrintMaterial = Book | Magazine;
+type Serial = Book & Magazine;
 
 /***************************************************************************************** */
 //Destructuring Arrays
@@ -81,14 +86,14 @@ let catalogLocations: KeyValuePair<string, Book> = ['A 123.456', book1];
 let allBooks: Array<Book> = util.GetAllBooks();
 let allMagazines: Array<Magazine> = util.GetAllMagazines();
 
-let readingMaterial: Book, Magazine = allMagazines[0];
+let readingMaterial: PrintMaterial = allMagazines[0];
 
 // PrintTitle(allBooks[0]);
 // PrintTitle(allMagazines[0]);
 
 
 //Intersecction
-let sreialNovel: Book & Magazine = {
+let sreialNovel: Serial = {
     id: 100,
     title: 'The Gradual Tale',
     author: 'Occasional Pen',
@@ -103,4 +108,21 @@ applyMixins(UniversityLibrarian, [Employee, Researcher]);
 let newLibrarian = new UniversityLibrarian();
 //This allows us to create a Object with a mix of properties obf both classes
 newLibrarian.doResearch('Economics');
+
+
+//String Literal types
+
+let empCategory: 'Manager' | 'Non-Manager' = 'Manager';
+
+//Type Aliases
+
+type Frecuency = 'Manager' | 'Non-Manager';
+
+let empCategory1: Frecuency = 'Manager';
+empCategory = 'Non-Manager';
+
+
+
+
+
 

@@ -28,6 +28,8 @@ function applyMixins(deriverCto, baseCtors) {
         });
     });
 }
+function GetMagazineByFrecuency(preferredFrecuency) {
+}
 /***************************************************************************************** */
 //Destructuring Arrays
 var _a = util.GetAllBooks(), book1 = _a[0], book2 = _a[1];
@@ -65,7 +67,7 @@ var catalogLocations = ['A 123.456', book1];
 //Union Types
 var allBooks = util.GetAllBooks();
 var allMagazines = util.GetAllMagazines();
-var readingMaterial, Magazine = allMagazines[0];
+var readingMaterial = allMagazines[0];
 // PrintTitle(allBooks[0]);
 // PrintTitle(allMagazines[0]);
 //Intersecction
@@ -82,4 +84,8 @@ applyMixins(classes_1.UniversityLibrarian, [classes_1.Employee, classes_1.Resear
 var newLibrarian = new classes_1.UniversityLibrarian();
 //This allows us to create a Object with a mix of properties obf both classes
 newLibrarian.doResearch('Economics');
+//String Literal types
+var empCategory = 'Manager';
+var empCategory1 = 'Manager';
+empCategory = 'Non-Manager';
 //# sourceMappingURL=app.js.map
