@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var enums_1 = require("./enums");
+var classes_1 = require("./classes");
 var util = require("./lib/utilityFunctions");
 //function PrintBookInfo({title: booktitle, author: bookauthor} : Book): void {
 function PrintBookInfo(item) {
@@ -16,6 +17,16 @@ function LogFavouriteBooks(_a) {
 }
 function PrintTitle(item) {
     console.log(item.title);
+}
+/**
+*This Method allow us to create a new class wich is a mix of two classes
+*/
+function applyMixins(deriverCto, baseCtors) {
+    baseCtors.forEach(function (baseCtors) {
+        Object.getOwnPropertyNames(baseCtors.prototype).forEach(function (name) {
+            deriverCto.prototype[name] = baseCtors.prototype[name];
+        });
+    });
 }
 /***************************************************************************************** */
 //Destructuring Arrays
@@ -66,4 +77,9 @@ var sreialNovel = {
     category: enums_1.Category.Fiction,
     publisher: 'Serial Press'
 };
+//Mixing
+applyMixins(classes_1.UniversityLibrarian, [classes_1.Employee, classes_1.Researcher]);
+var newLibrarian = new classes_1.UniversityLibrarian();
+//This allows us to create a Object with a mix of properties obf both classes
+newLibrarian.doResearch('Economics');
 //# sourceMappingURL=app.js.map

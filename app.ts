@@ -1,16 +1,16 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine, KeyValuePair } from './interfaces';
-import { UniversityLibrarian, ReferenceItem } from './classes';
+import { UniversityLibrarian, ReferenceItem, Employee, Researcher } from './classes';
 import * as util from './lib/utilityFunctions';
 
 //function PrintBookInfo({title: booktitle, author: bookauthor} : Book): void {
- function PrintBookInfo(item : Book): [string, string] {
+function PrintBookInfo(item: Book): [string, string] {
     // console.log(`${item.title} was authored by ${item.author}`);
     console.log(`${item.title} was authored by ${item.author}`);
     return [item.title, item.author];
 }
 
-function LogFavouriteBooks([book1, book2, ...others]: Array<Book>){
+function LogFavouriteBooks([book1, book2, ...others]: Array<Book>) {
     PrintBookInfo(book1);
     PrintBookInfo(book2);
     others.forEach(book => console.log(book));
@@ -20,6 +20,17 @@ function PrintTitle(item: Book | Magazine): void {
     console.log(item.title);
 }
 
+
+/**
+*This Method allow us to create a new class wich is a mix of two classes
+*/
+function applyMixins(deriverCto: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtors => {
+        Object.getOwnPropertyNames(baseCtors.prototype).forEach(name => {
+            deriverCto.prototype[name] = baseCtors.prototype[name];
+        });
+    });
+}
 
 
 
@@ -47,23 +58,23 @@ let schoolBooks: Array<Book> = [
     { id: 3, title: 'Clear light of Day ', author: 'Maya Angelou', available: true, category: Category.Biography }
 ];
 
-let booksRead : Array<Book> = util.GetAllBooks();
+let booksRead: Array<Book> = util.GetAllBooks();
 //Spread operator
 booksRead.push(...schoolBooks);
 // booksRead.forEach(book => console.log(book));
 
-let poets:Array<string> = ['Shelley', 'Collins', 'hughes'];
-let authors: string [] = ['Tolstoy', 'Fitzgerald', ...poets];
+let poets: Array<string> = ['Shelley', 'Collins', 'hughes'];
+let authors: string[] = ['Tolstoy', 'Fitzgerald', ...poets];
 //authors.forEach(book => console.log(book));
 
 //Tuples
-let booksPrinted:[string,string] = PrintBookInfo(book1)
+let booksPrinted: [string, string] = PrintBookInfo(book1)
 //console.log(booksPrinted);
 //the fileds types must be the same
 // let catalogLocations: [string, Book] = ['A 123.456', book1];
 // catalogLocations[2] = 'some string';
 // catalogLocations.forEach(book => console.log(book));
-let catalogLocations : KeyValuePair<string, Book> = ['A 123.456', book1];
+let catalogLocations: KeyValuePair<string, Book> = ['A 123.456', book1];
 
 
 //Union Types
@@ -77,7 +88,7 @@ let readingMaterial: Book, Magazine = allMagazines[0];
 
 
 //Intersecction
-let sreialNovel : Book & Magazine = {
+let sreialNovel: Book & Magazine = {
     id: 100,
     title: 'The Gradual Tale',
     author: 'Occasional Pen',
@@ -85,4 +96,11 @@ let sreialNovel : Book & Magazine = {
     category: Category.Fiction,
     publisher: 'Serial Press'
 }
+
+
+//Mixing
+applyMixins(UniversityLibrarian, [Employee, Researcher]);
+let newLibrarian = new UniversityLibrarian();
+//This allows us to create a Object with a mix of properties obf both classes
+newLibrarian.doResearch('Economics');
 
