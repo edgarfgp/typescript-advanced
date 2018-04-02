@@ -6,6 +6,7 @@ var util = require("./lib/utilityFunctions");
 function PrintBookInfo(item) {
     // console.log(`${item.title} was authored by ${item.author}`);
     console.log(item.title + " was authored by " + item.author);
+    return [item.title, item.author];
 }
 function LogFavouriteBooks(_a) {
     var book1 = _a[0], book2 = _a[1], others = _a.slice(2);
@@ -38,5 +39,13 @@ booksRead.push.apply(booksRead, schoolBooks);
 // booksRead.forEach(book => console.log(book));
 var poets = ['Shelley', 'Collins', 'hughes'];
 var authors = ['Tolstoy', 'Fitzgerald'].concat(poets);
-authors.forEach(function (book) { return console.log(book); });
+//authors.forEach(book => console.log(book));
+//Tuples
+var booksPrinted = PrintBookInfo(book1);
+//console.log(booksPrinted);
+//the fileds types must be the same
+// let catalogLocations: [string, Book] = ['A 123.456', book1];
+// catalogLocations[2] = 'some string';
+// catalogLocations.forEach(book => console.log(book));
+var catalogLocations = ['A 123.456', book1];
 //# sourceMappingURL=app.js.map

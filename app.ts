@@ -1,13 +1,13 @@
 import { Category } from './enums';
-import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
+import { Book, Logger, Author, Librarian, Magazine, KeyValuePair } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
 import * as util from './lib/utilityFunctions';
 
 //function PrintBookInfo({title: booktitle, author: bookauthor} : Book): void {
- function PrintBookInfo(item : Book): void {
+ function PrintBookInfo(item : Book): [string, string] {
     // console.log(`${item.title} was authored by ${item.author}`);
     console.log(`${item.title} was authored by ${item.author}`);
-
+    return [item.title, item.author];
 }
 
 function LogFavouriteBooks([book1, book2, ...others]: Array<Book>){
@@ -50,6 +50,16 @@ booksRead.push(...schoolBooks);
 
 let poets:Array<string> = ['Shelley', 'Collins', 'hughes'];
 let authors: string [] = ['Tolstoy', 'Fitzgerald', ...poets];
-authors.forEach(book => console.log(book));
+//authors.forEach(book => console.log(book));
+
+//Tuples
+let booksPrinted:[string,string] = PrintBookInfo(book1)
+//console.log(booksPrinted);
+//the fileds types must be the same
+// let catalogLocations: [string, Book] = ['A 123.456', book1];
+// catalogLocations[2] = 'some string';
+// catalogLocations.forEach(book => console.log(book));
+let catalogLocations : KeyValuePair<string, Book> = ['A 123.456', book1];
+
 
 

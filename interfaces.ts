@@ -33,4 +33,9 @@ interface Magazine {
     publisher: string;
 }
 
-export { Book, DamageLogger as Logger, Author, Librarian, Magazine };
+interface KeyValuePair<K, V> extends Array<K | V> {
+    0: K;
+    1: V;
+}
+
+export { Book, DamageLogger as Logger, Author, Librarian, Magazine, KeyValuePair };
