@@ -16,6 +16,10 @@ function LogFavouriteBooks([book1, book2, ...others]: Array<Book>){
     others.forEach(book => console.log(book));
 }
 
+function PrintTitle(item: Book | Magazine): void {
+    console.log(item.title);
+}
+
 
 
 
@@ -62,4 +66,12 @@ let booksPrinted:[string,string] = PrintBookInfo(book1)
 let catalogLocations : KeyValuePair<string, Book> = ['A 123.456', book1];
 
 
+//Union Types
+let allBooks: Array<Book> = util.GetAllBooks();
+let allMagazines: Array<Magazine> = util.GetAllMagazines();
+
+let readingMaterial: Book, Magazine = allMagazines[0];
+
+PrintTitle(allBooks[0]);
+PrintTitle(allMagazines[0]);
 

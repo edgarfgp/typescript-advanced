@@ -14,6 +14,9 @@ function LogFavouriteBooks(_a) {
     PrintBookInfo(book2);
     others.forEach(function (book) { return console.log(book); });
 }
+function PrintTitle(item) {
+    console.log(item.title);
+}
 /***************************************************************************************** */
 //Destructuring Arrays
 var _a = util.GetAllBooks(), book1 = _a[0], book2 = _a[1];
@@ -48,4 +51,10 @@ var booksPrinted = PrintBookInfo(book1);
 // catalogLocations[2] = 'some string';
 // catalogLocations.forEach(book => console.log(book));
 var catalogLocations = ['A 123.456', book1];
+//Union Types
+var allBooks = util.GetAllBooks();
+var allMagazines = util.GetAllMagazines();
+var readingMaterial, Magazine = allMagazines[0];
+PrintTitle(allBooks[0]);
+PrintTitle(allMagazines[0]);
 //# sourceMappingURL=app.js.map
