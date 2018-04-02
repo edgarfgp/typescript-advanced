@@ -55,6 +55,15 @@ var catalogLocations = ['A 123.456', book1];
 var allBooks = util.GetAllBooks();
 var allMagazines = util.GetAllMagazines();
 var readingMaterial, Magazine = allMagazines[0];
-PrintTitle(allBooks[0]);
-PrintTitle(allMagazines[0]);
+// PrintTitle(allBooks[0]);
+// PrintTitle(allMagazines[0]);
+//Intersecction
+var sreialNovel = {
+    id: 100,
+    title: 'The Gradual Tale',
+    author: 'Occasional Pen',
+    available: true,
+    category: enums_1.Category.Fiction,
+    publisher: 'Serial Press'
+};
 //# sourceMappingURL=app.js.map

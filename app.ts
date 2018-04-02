@@ -72,6 +72,17 @@ let allMagazines: Array<Magazine> = util.GetAllMagazines();
 
 let readingMaterial: Book, Magazine = allMagazines[0];
 
-PrintTitle(allBooks[0]);
-PrintTitle(allMagazines[0]);
+// PrintTitle(allBooks[0]);
+// PrintTitle(allMagazines[0]);
+
+
+//Intersecction
+let sreialNovel : Book & Magazine = {
+    id: 100,
+    title: 'The Gradual Tale',
+    author: 'Occasional Pen',
+    available: true,
+    category: Category.Fiction,
+    publisher: 'Serial Press'
+}
 
