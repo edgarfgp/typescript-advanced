@@ -88,4 +88,33 @@ newLibrarian.doResearch('Economics');
 var empCategory = 'Manager';
 var empCategory1 = 'Manager';
 empCategory = 'Non-Manager';
+//Asynchronous Patterns
+function getBooksByCategory(cat, callback) {
+    setTimeout(function () {
+        try {
+            var foundBooks = util.GetBookTitlesByCategory(cat);
+            if (foundBooks.length > 0) {
+                callback(null, foundBooks);
+            }
+            else {
+                throw new Error('No books found');
+            }
+        }
+        catch (error) {
+            callback(error, null);
+        }
+    }, 2000);
+}
+function logCategorySearch(err, titles) {
+    if (err) {
+        console.log("Error message: " + err.message);
+    }
+    else {
+        console.log("Found the following titles:");
+        console.log(titles.forEach(function (book) { return console.log(book); }));
+    }
+}
+console.log('Beginnig search');
+getBooksByCategory(enums_1.Category.Fiction, logCategorySearch);
+console.log('Search submitted...');
 //# sourceMappingURL=app.js.map

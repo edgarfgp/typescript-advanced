@@ -1,5 +1,5 @@
 import { Category } from './enums';
-import { Book, Logger, Author, Librarian, Magazine, KeyValuePair } from './interfaces';
+import { Book, Logger, Author, Librarian, Magazine, KeyValuePair, LibManagCallback } from './interfaces';
 import { UniversityLibrarian, ReferenceItem, Employee, Researcher } from './classes';
 import * as util from './lib/utilityFunctions';
 
@@ -120,6 +120,42 @@ type Frecuency = 'Manager' | 'Non-Manager';
 
 let empCategory1: Frecuency = 'Manager';
 empCategory = 'Non-Manager';
+
+
+//Asynchronous Patterns
+
+function getBooksByCategory(cat: Category, callback: LibManagCallback): void {
+
+    setTimeout(() => {
+        try {
+            let foundBooks: Array<string> = util.GetBookTitlesByCategory(cat);
+
+            if (foundBooks.length > 0) {
+                callback(null, foundBooks);
+
+            } else {
+                throw new Error('No books found');
+            }
+        } catch (error) {
+            callback(error, null);
+        }
+    }, 2000);
+}
+
+function logCategorySearch(err: Error, titles: Array<string>): void {
+    if (err) {
+        console.log(`Error message: ${err.message}`);
+    } else {
+        console.log(`Found the following titles:`);
+        console.log(titles.forEach(book => console.log(book)));
+    }
+}
+
+console.log('Beginnig search');
+
+getBooksByCategory(Category.Fiction, logCategorySearch);
+console.log('Search submitted...');
+
 
 
 

@@ -10,6 +10,10 @@ interface Book {
     markDamaged?: DamageLogger;
 }
 
+interface LibManagCallback {
+    (err: Error, title: Array<string>): void;
+}
+
 interface DamageLogger {
     (reason: string): void;
 }
@@ -38,4 +42,4 @@ interface KeyValuePair<K, V> extends Array<K | V> {
     1: V;
 }
 
-export { Book, DamageLogger as Logger, Author, Librarian, Magazine, KeyValuePair };
+export { Book, DamageLogger as Logger, Author, Librarian, Magazine, KeyValuePair, LibManagCallback };
