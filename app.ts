@@ -156,6 +156,35 @@ empCategory = 'Non-Manager';
 // getBooksByCategory(Category.Fiction, logCategorySearch);
 // console.log('Search submitted...');
 
+//Promises
+// function getBooksByCategory(cat: Category): Promise<Array<string>> {
+//     let p: Promise<Array<string>> = new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             let foundBooks: Array<string> = util.GetBookTitlesByCategory(cat);
+
+//             if (foundBooks.length > 0) {
+//                 resolve(foundBooks);
+
+//             } else {
+//                 reject('No books found for that categoty.');
+//             }
+//         }, 2000);
+//     });
+
+//     return p;
+// }
+// console.log('Beginnig search');
+// getBooksByCategory(Category.Fiction)
+//     .then(titles => {
+//         console.log(`Found titles: ${titles}`)
+//         return titles.length;
+//     })
+//     .then(numofBooks => console.log(`Number of Books Found : ${numofBooks}`))
+//     .catch(reason => console.log(`Error: ${reason}`));
+// console.log('Search submitted...');
+
+
+//asyn await
 
 function getBooksByCategory(cat: Category): Promise<Array<string>> {
     let p: Promise<Array<string>> = new Promise((resolve, reject) => {
@@ -173,19 +202,23 @@ function getBooksByCategory(cat: Category): Promise<Array<string>> {
 
     return p;
 }
+
+async function logSearchResult(bookCategory: Category) {
+
+    try {
+
+        let foundBook = await getBooksByCategory(bookCategory);
+        foundBook.forEach(book => console.log(book));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 console.log('Beginnig search');
-getBooksByCategory(Category.Fiction)
-    .then(titles => {
-        console.log(`Found titles: ${titles}`)
-        return titles.length;
-    })
-    .then(numofBooks => console.log(`Number of Books Found : ${numofBooks}`))
-    .catch(reason => console.log(`Error: ${reason}`));
+logSearchResult(Category.Fiction)
+    .catch(reason => console.log(reason));
 console.log('Search submitted...');
-
-
-
-
 
 
 
