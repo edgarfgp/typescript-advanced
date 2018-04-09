@@ -124,36 +124,63 @@ empCategory = 'Non-Manager';
 
 //Asynchronous Patterns
 
-function getBooksByCategory(cat: Category, callback: LibManagCallback): void {
+// function getBooksByCategory(cat: Category, callback: LibManagCallback): void {
 
-    setTimeout(() => {
-        try {
+//     setTimeout(() => {
+//         try {
+//             let foundBooks: Array<string> = util.GetBookTitlesByCategory(cat);
+
+//             if (foundBooks.length > 0) {
+//                 callback(null, foundBooks);
+
+//             } else {
+//                 throw new Error('No books found');
+//             }
+//         } catch (error) {
+//             callback(error, null);
+//         }
+//     }, 2000);
+// }
+
+// function logCategorySearch(err: Error, titles: Array<string>): void {
+//     if (err) {
+//         console.log(`Error message: ${err.message}`);
+//     } else {
+//         console.log(`Found the following titles:`);
+//         console.log(titles.forEach(book => console.log(book)));
+//     }
+// }
+
+// console.log('Beginnig search');
+
+// getBooksByCategory(Category.Fiction, logCategorySearch);
+// console.log('Search submitted...');
+
+
+function getBooksByCategory(cat: Category): Promise<Array<string>> {
+    let p: Promise<Array<string>> = new Promise((resolve, reject) => {
+        setTimeout(() => {
             let foundBooks: Array<string> = util.GetBookTitlesByCategory(cat);
 
             if (foundBooks.length > 0) {
-                callback(null, foundBooks);
+                resolve(foundBooks);
 
             } else {
-                throw new Error('No books found');
+                reject('No books found for that categoty.');
             }
-        } catch (error) {
-            callback(error, null);
-        }
-    }, 2000);
-}
+        }, 2000);
+    });
 
-function logCategorySearch(err: Error, titles: Array<string>): void {
-    if (err) {
-        console.log(`Error message: ${err.message}`);
-    } else {
-        console.log(`Found the following titles:`);
-        console.log(titles.forEach(book => console.log(book)));
-    }
+    return p;
 }
-
 console.log('Beginnig search');
-
-getBooksByCategory(Category.Fiction, logCategorySearch);
+getBooksByCategory(Category.Fiction)
+    .then(titles => {
+        console.log(`Found titles: ${titles}`)
+        return titles.length;
+    })
+    .then(numofBooks => console.log(`Number of Books Found : ${numofBooks}`))
+    .catch(reason => console.log(`Error: ${reason}`));
 console.log('Search submitted...');
 
 
